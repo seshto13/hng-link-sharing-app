@@ -4,22 +4,23 @@ import { getAuth } from "firebase/auth";
 //import { PROTECTED_PATHS, PUBLIC_PATHS } from "./app/config/route";
 
 export function middleware(request: NextRequest) {
-  // const auth = getAuth(firebaseApp);
-  /*const loggedin: boolean =
-    (request.cookies.get("SESSION")?.value as unknown as boolean) ??
-    (false as boolean);
+  const PROTECTED_PATHS = ["/", "/dashboard", "/profile"];
+  const PUBLIC_PATHS = ["/login", "/register"];
 
-  if (!loggedin && PROTECTED_PATHS.includes(request.nextUrl.pathname)) {
+  const loggedin: string = request.cookies.get("SESSION")?.value ?? "false";
+
+  if (
+    loggedin !== "true" &&
+    PROTECTED_PATHS.includes(request.nextUrl.pathname)
+  ) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  if (loggedin && PUBLIC_PATHS.includes(request.nextUrl.pathname)) {
+  if (loggedin === "true" && PUBLIC_PATHS.includes(request.nextUrl.pathname)) {
     return NextResponse.redirect(new URL("/", request.url));
   }
-*/
-  // console.log("user");
 }
 
-/*export const config = {
-  matcher: ["/", "/api/:path/alpha", `/api/:path/beta`],
-};*/
+export const config = {
+  matcher: ["/", "/login", "/register", "/profile"],
+};

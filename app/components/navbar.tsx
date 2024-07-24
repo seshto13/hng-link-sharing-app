@@ -1,27 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import image from "../../public/assets/icons/Vector.png";
 import signOut from "../firebase/signout";
-//import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
+import { useCookies } from "next-client-cookies";
 
 const Navbar = () => {
+  const cookies = useCookies();
   const router = useRouter();
   const [nav, setNav] = useState(false);
 
   const currentPath = usePathname();
 
   async function handleLogout() {
-    //await signOut();
-    //  Cookies.remove("SESSION");
-    // Cookies.remove("user");
-
+    cookies.remove("SESSION");
+    cookies.remove("user");
     router.push("/login");
   }
 

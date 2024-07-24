@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import image from "../../public/assets/icons/Vector.png";
 import envelope from "../../public/assets/envelope.png";
@@ -8,8 +8,7 @@ import lock from "../../public/assets/icons/lock.svg";
 import Image from "next/image";
 import signIn from "../firebase/signin";
 import { useRouter } from "next/navigation";
-import type { NextRequest } from "next/server";
-//import Cookies from "js-cookie";
+import { useCookies } from "next-client-cookies";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -20,6 +19,7 @@ const Login = () => {
   const [authError, setAuthError] = useState("");
 
   const router = useRouter();
+  const cookies = useCookies();
 
   const handleSubmit = async (event: any) => {
     setUsernameError("");
@@ -53,11 +53,10 @@ const Login = () => {
 
     // else successful
     console.log(result?.user);
-    //Cookies.set("SESSION", true);
-    // Cookies.set("user", JSON.stringify(result?.user));
-    return router.push("/");
+    cookies.set("SESSION", "true");
+    cookies.set("user", JSON.stringify(result?.user));
 
-    //alert("Form submitted successfully");
+    router.push("/");
   };
 
   const togglePasswordVisibility = () => {
