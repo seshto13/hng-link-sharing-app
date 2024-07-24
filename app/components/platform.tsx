@@ -16,36 +16,36 @@ const Platform = () => {
   const [items, setItems] = useState<any>([]);
   const [loading, setLoading] = useState(true);
 
-  async function fetchItems() {
-    setLoading(true);
-    setItems([{ name: "Tommy" }, { name: "Tommy" }]);
-    //const querySnapshot = await getDocs(collection(auth, "users"))
-    console.log("Logos here");
-    // console.log(querySnapshot.docs)
-    /*querySnapshot.docs.map((doc) => {
-      
-      console.log(doc._document?.data?.value?.mapValue.fields.link.stringValue)
-      console.log(doc._document?.data?.value?.mapValue.fields.name.stringValue)
-    })*/
-    //setItems(querySnapshot.docs);
-    /*if(querySnapshot.docs !==  null) {
-     const  result = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-     setItems([{'name' :'Tommy'},{'name' :'Tommy'}])
-    setLoading(false);
-   // setData(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-   //let result = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-   //console.log(result);
-   console.log("Data Here");
-   console.log(items);
-   console.log(result);
-
-    }*/
-
-    setLoading(false);
-    console.log(items);
-  }
-
   useEffect(() => {
+    async function fetchItems() {
+      setLoading(true);
+      //setItems([{ name: "Tommy" }, { name: "Tommy" }]);
+      //const querySnapshot = await getDocs(collection(auth, "users"))
+      console.log("Logos here");
+      // console.log(querySnapshot.docs)
+      /*querySnapshot.docs.map((doc) => {
+        
+        console.log(doc._document?.data?.value?.mapValue.fields.link.stringValue)
+        console.log(doc._document?.data?.value?.mapValue.fields.name.stringValue)
+      })*/
+      //setItems(querySnapshot.docs);
+      /*if(querySnapshot.docs !==  null) {
+       const  result = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+       setItems([{'name' :'Tommy'},{'name' :'Tommy'}])
+      setLoading(false);
+     // setData(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+     //let result = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+     //console.log(result);
+     console.log("Data Here");
+     console.log(items);
+     console.log(result);
+  
+      }*/
+
+      setLoading(false);
+      //  console.log(items);
+    }
+
     fetchItems();
   }, []);
 
