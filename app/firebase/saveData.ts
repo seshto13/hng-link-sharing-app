@@ -4,7 +4,7 @@ import { getDatabase } from "firebase/database";
 
 const auth = getFirestore(firebaseApp);
 const database = getDatabase(firebaseApp);
-export default async function addData({
+export default async function saveData({
   colllection,
   id,
   data,
@@ -20,10 +20,6 @@ export default async function addData({
     result = await setDoc(doc(auth, colllection, id), data, {
       merge: true,
     });
-
-    /*const docRef = await addDoc(collection(db, "items"), {
-        name: value
-    });*/
   } catch (e) {
     error = e;
   }

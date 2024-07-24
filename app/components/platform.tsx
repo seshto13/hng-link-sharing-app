@@ -3,61 +3,40 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import image from "../../public/assets/icons/ph_link-bold.png";
 import teen from "../../public/assets/icons/teenyicons_github-solid.svg";
-import fetchDatabase from "../firebase/fetchDatanase";
 import { RxDropdownMenu } from "react-icons/rx";
 import Dropdown from "./dropDown";
 import { getFirestore } from "firebase/firestore";
 import firebaseApp from "../config/firebaseConfig";
+import { useCookies } from "next-client-cookies";
+import saveData from "../firebase/saveData";
 
 const auth = getFirestore(firebaseApp);
 const Platform = () => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState(menu[0].name);
   const [link, setLink] = useState("");
   const [items, setItems] = useState<any>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchItems() {
-      setLoading(true);
-      //setItems([{ name: "Tommy" }, { name: "Tommy" }]);
-      //const querySnapshot = await getDocs(collection(auth, "users"))
-      console.log("Logos here");
-      // console.log(querySnapshot.docs)
-      /*querySnapshot.docs.map((doc) => {
-        
-        console.log(doc._document?.data?.value?.mapValue.fields.link.stringValue)
-        console.log(doc._document?.data?.value?.mapValue.fields.name.stringValue)
-      })*/
-      //setItems(querySnapshot.docs);
-      /*if(querySnapshot.docs !==  null) {
-       const  result = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-       setItems([{'name' :'Tommy'},{'name' :'Tommy'}])
-      setLoading(false);
-     // setData(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-     //let result = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-     //console.log(result);
-     console.log("Data Here");
-     console.log(items);
-     console.log(result);
-  
-      }*/
+  const cookies = useCookies();
 
-      setLoading(false);
-      //  console.log(items);
-    }
+  /*useEffect(() => {
+    const user = JSON.parse(cookies.get("user") ?? "");
+    console.log(user);
+  }, []);*/
 
-    fetchItems();
-  }, []);
-
-  const handleAddLink = async () => {
+  const submitLink = async () => {
     const data = {
       name: name,
       link: link,
     };
 
-    const { result, error } = await fetchDatabase({
-      colllection: "users",
-      id: "user-id",
+    const user = JSON.parse(cookies.get("user") ?? "");
+    console.log(user);
+
+    const { result, error } = await saveData({
+      colllection: `users/${user.uid}/data`,
+      id: name,
+      data: data,
     });
 
     if (error) {
@@ -69,30 +48,6 @@ const Platform = () => {
     if (result) {
       console.log("result " + result);
     }
-    /*const { result, error } = await getDocument({
-      collection: "users",
-      id: "user-id",
-    });*
-
-    if (error) {
-      return console.log(error);
-    }
-    
-
-    console.log(result);
-    /*const data = {
-      name: name,
-      link: link,
-    };
-    const { result, error } = await addData({
-      colllection: "users",
-      id: "user-id",
-      data: data,
-    });
-
-    if (error) {
-      return console.log(error);
-    }*/
   };
   return (
     <div>
@@ -116,6 +71,10 @@ const Platform = () => {
           <select
             className="w-full md:w-[674px] px-8 p-3 mt-10 rounded-xl  border-2 border-gray-300 hover:border-violet-300 cursor-pointer hover:shadow-md hover:shadow-violet-600 hover:shadow-opacity-25"
             id="username"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
           >
             {menu &&
               menu.map((item, index) => {
@@ -142,8 +101,8 @@ const Platform = () => {
             type="text"
             className="w-full md:w-[674px] px-8 p-3 mt-10 rounded-xl  border-2 border-gray-300 hover:border-violet-300  hover:shadow-md hover:shadow-violet-600 hover:shadow-opacity-25"
             id="text"
-            value="hhhh"
-            // onChange={(event) => setLink(event.target.value)}
+            value={link}
+            onChange={(event) => setLink(event.target.value)}
             placeholder="e.g https://www.github.com/benwright"
           />
         </div>
@@ -151,9 +110,9 @@ const Platform = () => {
 
       <button
         className="p-4 border-spacing-1 border-red-500"
-        onClick={() => handleAddLink()}
+        onClick={() => submitLink()}
       >
-        {" "}
+        Submit
       </button>
     </div>
   );
