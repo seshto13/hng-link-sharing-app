@@ -97,56 +97,56 @@ const Platform = () => {
   return (
     <div>
       <Dropdown />
-<br />
+      <br />
       <div className="bg-gray-100 p-4">
-      <div className="relative ">
-        <div
-          className="absolute inset-y-0 left-0 top-10 pl-2  
+        <div className="relative ">
+          <div
+            className="absolute inset-y-0 left-0 top-10 pl-2  
                     flex items-center gap-8 
                     pointer-events-none"
-        >
-          <Image
-            src={teen}
-            width={100}
-            height={100}
-            alt=""
-            className=" w-5 h-5 border-md"
-          />
+          >
+            <Image
+              src={teen}
+              width={100}
+              height={100}
+              alt=""
+              className=" w-5 h-5 border-md"
+            />
+          </div>
+          <select
+            className="w-full md:w-[674px] px-8 p-3 mt-10 rounded-xl  border-2 border-gray-300 hover:border-violet-300 cursor-pointer hover:shadow-md hover:shadow-violet-600 hover:shadow-opacity-25"
+            id="username"
+          >
+            {menu &&
+              menu.map((item, index) => {
+                return <option key={index}>{item.name}</option>;
+              })}
+          </select>
         </div>
-        <select
-          className="w-full md:w-[674px] px-8 p-3 mt-10 rounded-xl  border-2 border-gray-300 hover:border-violet-300 cursor-pointer hover:shadow-md hover:shadow-violet-600 hover:shadow-opacity-25"
-          id="username"
-        >
-          {menu &&
-            menu.map((item) => {
-              return <option>{item.name}</option>;
-            })}
-        </select>
-      </div>
 
-      <div className="relative">
-        <div
-          className="absolute inset-y-0 left-0 top-10 pl-2  
+        <div className="relative">
+          <div
+            className="absolute inset-y-0 left-0 top-10 pl-2  
                     flex items-center gap-8 
                     pointer-events-none"
-        >
-          <Image
-            src={image}
-            width={100}
-            height={100}
-            alt=""
-            className=" w-5 h-5 border-md"
+          >
+            <Image
+              src={image}
+              width={100}
+              height={100}
+              alt=""
+              className=" w-5 h-5 border-md"
+            />
+          </div>
+          <input
+            type="text"
+            className="w-full md:w-[674px] px-8 p-3 mt-10 rounded-xl  border-2 border-gray-300 hover:border-violet-300  hover:shadow-md hover:shadow-violet-600 hover:shadow-opacity-25"
+            id="text"
+            value="hhhh"
+            // onChange={(event) => setLink(event.target.value)}
+            placeholder="e.g https://www.github.com/benwright"
           />
         </div>
-        <input
-          type="text"
-          className="w-full md:w-[674px] px-8 p-3 mt-10 rounded-xl  border-2 border-gray-300 hover:border-violet-300  hover:shadow-md hover:shadow-violet-600 hover:shadow-opacity-25"
-          id="text"
-          value="hhhh"
-          // onChange={(event) => setLink(event.target.value)}
-          placeholder="e.g https://www.github.com/benwright"
-        />
-      </div>
       </div>
 
       <button

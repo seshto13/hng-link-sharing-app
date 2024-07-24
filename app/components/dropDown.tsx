@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import SelectedItem from './SelectItem';
+import { useState } from "react";
 
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +13,7 @@ const Dropdown = () => {
         onClick={toggleDropdown}
         className="w-full bg-white text-violet-600 border-2 border-violet-600 hover:bg-viole-300 font-medium py-2 px-4 rounded-md "
       >
-       Add new link
+        Add new link
       </button>
 
       {isOpen && (
@@ -22,17 +21,11 @@ const Dropdown = () => {
           <a
             href="#"
             className="block px-4 py-2 text-gray-800 hover:bg- hover:text-white"
-          >
-         
-          </a>
+          ></a>
           <a
             href="#"
             className="block px-4 py-2 text-gray-800 hover:bg- hover:text-white"
-          >
-        
-          </a>
-         
-         
+          ></a>
         </div>
       )}
     </div>

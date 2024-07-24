@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuth } from "firebase/auth";
-import Cookies from "js-cookie";
+//import Cookies from "js-cookie";
 import { PROTECTED_PATHS, PUBLIC_PATHS } from "./app/config/route";
 
 export function middleware(request: NextRequest) {

@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import image from "../../public/assets/icons/Vector.png";
 import signOut from "../firebase/signout";
-import Cookies from "js-cookie";
+//import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
@@ -18,9 +18,9 @@ const Navbar = () => {
   const currentPath = usePathname();
 
   async function handleLogout() {
-    await signOut();
-    Cookies.remove("SESSION");
-    Cookies.remove("user");
+    //await signOut();
+    //  Cookies.remove("SESSION");
+    // Cookies.remove("user");
 
     router.push("/login");
   }

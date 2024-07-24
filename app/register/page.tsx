@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { FaEyeSlash, FaEye } from "react-icons/fa";
-import image from "../../public/Vector.png";
-import envelope from "../../public/envelope.png";
-import lock from "../../public/lock.svg";
+//import image from "../../public/assets/Vector.png";
+import image from "../../public/assets/icons/Vector.png";
+import envelope from "../../public/assets/envelope.png";
+import lock from "../../public/assets/icons/lock.svg";
 import Image from "next/image";
 import SignUp from "../firebase/signup";
 import { useRouter } from "next/navigation";

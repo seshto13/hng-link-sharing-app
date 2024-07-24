@@ -1,15 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { FaEyeSlash, FaEye } from "react-icons/fa";
-import image from "../../public/Vector.png";
-import envelope from "../../public/envelope.png";
-import lock from "../../public/lock.svg";
+import image from "../../public/assets/icons/Vector.png";
+import envelope from "../../public/assets/envelope.png";
+
+import lock from "../../public/assets/icons/lock.svg";
 import Image from "next/image";
 import signIn from "../firebase/signin";
 import { useRouter } from "next/navigation";
 import type { NextRequest } from "next/server";
-import Cookies from "js-cookie";
+//import Cookies from "js-cookie";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -53,8 +53,8 @@ const Login = () => {
 
     // else successful
     console.log(result?.user);
-    Cookies.set("SESSION", true);
-    Cookies.set("user", JSON.stringify(result?.user));
+    //Cookies.set("SESSION", true);
+    // Cookies.set("user", JSON.stringify(result?.user));
     return router.push("/");
 
     //alert("Form submitted successfully");
