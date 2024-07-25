@@ -160,4 +160,25 @@ const menu = [
     icon: "",
     color: "bg-sky-400 text-white",
   },
+  {
+    name: "LinkedIn",
+    icon: "",
+    color: "bg-blue-600 text-white",
+  },
+  {
+    name: "YouTube",
+    icon: "",
+    color: "bg-red-500 text-white",
+  },
+
+  {
+    name: "Facebook",
+    icon: "",
+    color: "bg-blue-800 text-white",
+  },
+  {
+    name: "Twitch",
+    icon: "",
+    color: "bg-fuchsia-500 text-white",
+  },
 ];
