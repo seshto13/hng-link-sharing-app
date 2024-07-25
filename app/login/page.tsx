@@ -173,7 +173,7 @@ const Login = () => {
 
           <br />
           <div className="flex items-center justify-center gap-2">
-            <p className="text-black">{`Don't have an account?`} </p>
+            <p className="text-black">Don&apos;t have an account? </p>
             <Link
               href="/register"
               className="text-violet-600 hover:text-violet-900"

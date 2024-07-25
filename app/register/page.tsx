@@ -190,10 +190,10 @@ const Register = () => {
           <div className="flex items-center justify-center gap-2">
             <p className="text-black">{`Already have an account?`} </p>
             <Link
-              href="/register"
+              href="/login"
               className="text-violet-600 hover:text-violet-900"
             >
-              Create new account
+              Login
             </Link>
           </div>
         </div>

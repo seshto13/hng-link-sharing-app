@@ -104,10 +104,10 @@ const Platform = () => {
       </div>
 
       <button
-        className="p-4 border-spacing-1 border-red-500"
+        className="px-4 py-2 border-2  bg-violet-600 text-white rounded-md"
         onClick={() => submitLink()}
       >
-        Submit
+        Save
       </button>
     </div>
   );

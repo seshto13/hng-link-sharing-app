@@ -68,7 +68,7 @@ const Navbar = () => {
           </Link>
         </ul>
 
-        <Link href="/preview">
+        <Link href="/">
           <button className="w-32 h-12 px-4 py-1 md:py-2 me-2  bg-white border-2 border-violet-600 rounded-md hover:bg-violet-600 text-violet-600  hover:text-white hover:border-0">
             Preview
           </button>
