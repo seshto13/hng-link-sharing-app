@@ -5,7 +5,7 @@ import ButtonSave from './buttonSave'
 
 const profileRightSection = () => {
   return (
-    <div className="flex flex-col justify-center lg:absolute left-[512px] md:top-[80px] md:[500px]  lg:w-[708px]   bg-white p-4 my-16">
+    <div className="flex flex-col justify-center lg:absolute left-[500px] top-[100px] md:w-[700px] bg-white p-4 my-16">
       <header className="text-[32px] font-base md:font-bold leading-[150%] text-zinc-800 flex-grow px-3">
       Profile Details
       </header>
