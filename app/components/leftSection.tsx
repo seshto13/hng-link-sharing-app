@@ -7,43 +7,44 @@ import bar1 from "../../public/assets/mockup/bigbar.svg";
 import bar2 from "../../public/assets/mockup/smallbar.svg";
 import fetchData from "../firebase/fetchData";
 import { useCookies } from "next-client-cookies";
+import { useSelector, useDispatch } from 'react-redux';
+import {GetLink} from "@/app/redux/reducer";
+
 
 
 const LeftSection = () => {
-
-  const [items, setItems] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [dataError, setDataError] = useState<any>();
 
-  const cookies = useCookies();
+  const links = useSelector((state: any) => state.info);
+  const dispatch = useDispatch()
 
+  const cookies = useCookies();
   useEffect(() => {
     
     const fetchItems = async () => {
       setLoading(true);
       const user = JSON.parse(cookies.get("user") ?? "");
-
       const {result, error} = await fetchData({userId : `users/${user.uid}/data`});
+
       if(error) {
         console.log(error);
-        setDataError(error);
       }
   
       if(result) {
         console.log(result);
-        setItems(result);
+        dispatch(GetLink(result))
+      
       }
-   
-  
       setLoading(false);
       console.log(result);
     }
 
     fetchItems()
-   }, [cookies])
+   }, [cookies, dispatch])
 
   return (
-    <div className="hidden md:flex flex-col items-center justify-center w-full md:w-[512px] md:h-auto bg-gray-50  lg:absolute left-0 top-[90px] p-4 ">
+     <div className="hidden md:flex flex-col items-center justify-center w-full md:w-[512px] md:h-auto bg-gray-50  lg:absolute left-0 top-[90px] p-4 ">
       <div className="relative flex items-center justify-center  mx-auto border-neutral-500 dark:border-gray-100 bg-white border-[1px] rounded-3xl h-[631px] w-[307px]">
         <div className=" flex flex-col items-center">
          
@@ -88,7 +89,8 @@ const LeftSection = () => {
 
 
 <div className="grid grid-cols-1 absolute top-64 left-9 gap-4">
-{items && items.map((item : any) => {
+
+{links && links.map((item : any) => {
        
        return(<>
        <div className=" w-[237px] h-[44px] border-md bg-gray-200">
@@ -98,10 +100,10 @@ const LeftSection = () => {
        </> ) 
        
        })}
+
          
              </div>
-
-
+            
         </div>
       </div>
     </div>

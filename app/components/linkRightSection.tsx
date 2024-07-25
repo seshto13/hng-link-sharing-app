@@ -16,7 +16,7 @@ const LinkRightSection = () => {
         world!
       </p>
       
-  <Platform />   
+  <Platform />    
      
      
     </div>

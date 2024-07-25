@@ -9,6 +9,9 @@ import { getFirestore } from "firebase/firestore";
 import firebaseApp from "../config/firebaseConfig";
 import { useCookies } from "next-client-cookies";
 import saveData from "../firebase/saveData";
+import { useDispatch } from "react-redux";
+import { GetLink } from "@/app/redux/reducer";
+import fetchData from "../firebase/fetchData";
 
 const auth = getFirestore(firebaseApp);
 const Platform = () => {
@@ -18,11 +21,17 @@ const Platform = () => {
   const [loading, setLoading] = useState(true);
 
   const cookies = useCookies();
+  const dispatch = useDispatch();
 
   const submitLink = async () => {
+    const menuItem = menu.find((element) => {
+      return element.name === name;
+    });
     const data = {
       name: name,
       link: link,
+      color: menuItem?.color,
+      icon: menuItem?.icon,
     };
 
     const user = JSON.parse(cookies.get("user") ?? "");
@@ -38,10 +47,24 @@ const Platform = () => {
       alert(error);
     }
 
-    console.log("result " + result);
+    await fetchDate(`users/${user.uid}/data`);
 
     if (result) {
-      console.log("result " + result);
+      console.log("result w" + result);
+    }
+  };
+
+  const fetchDate = async (collection: string) => {
+    const { result, error } = await fetchData({ userId: collection });
+
+    if (error) {
+      console.log(error);
+      // setDataError(error);
+    }
+
+    if (result) {
+      console.log(result);
+      dispatch(GetLink(result));
     }
   };
   return (
