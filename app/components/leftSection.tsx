@@ -1,12 +1,37 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import phoneinner from "../../public/assets/mockup/Subtract.svg";
 import circle from "../../public/assets/mockup/circle.svg";
 import bar1 from "../../public/assets/mockup/bigbar.svg";
 import bar2 from "../../public/assets/mockup/smallbar.svg";
 import rectangle1 from "../../public/assets/mockup/Rectangle.svg";
+import fetchData from "../firebase/fetchData";
+
 const LeftSection = () => {
+  const [items, setItems] = useState<any>([]);
+  const [loading, setLoading] = useState(true);
+  const [dataError, setDataError] = useState<any>();
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      setLoading(true);
+      const { result, error } = await fetchData({ userId: "users/id/data" });
+      if (error) {
+        setDataError(error);
+      }
+
+      if (result) {
+        console.log(result);
+        setItems(result);
+      }
+
+      setLoading(false);
+    };
+
+    fetchItems();
+  }, []);
+
   return (
     <div className="hidden md:flex flex-col items-center justify-center w-full md:w-[512px] md:h-auto bg-gray-50  lg:absolute left-0 top-[90px] p-4 ">
       <div className="relative flex items-center justify-center  mx-auto border-neutral-500 dark:border-gray-100 bg-white border-[1px] rounded-3xl h-[631px] w-[307px]">
@@ -49,21 +74,18 @@ const LeftSection = () => {
             />
           </div>
 
-
-<div className="grid grid-cols-1 absolute top-64 left-9 gap-4">
-          <div className=" w-[237px] h-[44px] border-md bg-gray-200">
-             </div>
-             <div className="w-[237px] h-[44px] border-md bg-gray-200">
-             </div>
-             <div className="w-[237px] h-[44px] border-md bg-gray-200">
-             </div>
-             <div className="w-[237px] h-[44px] border-md bg-gray-200">
-             </div>
-             <div className="w-[237px] h-[44px] border-md bg-gray-200">
-             </div>
-             </div>
-
-
+          <div className="grid grid-cols-1 absolute top-64 left-9 gap-4">
+            {items &&
+              items.map((item: any) => {
+                return (
+                  <>
+                    <div className=" w-[237px] h-[44px] border-md bg-gray-200">
+                      {item.name}
+                    </div>
+                  </>
+                );
+              })}
+          </div>
         </div>
       </div>
     </div>

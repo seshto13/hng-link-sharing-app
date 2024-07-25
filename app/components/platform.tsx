@@ -19,11 +19,6 @@ const Platform = () => {
 
   const cookies = useCookies();
 
-  /*useEffect(() => {
-    const user = JSON.parse(cookies.get("user") ?? "");
-    console.log(user);
-  }, []);*/
-
   const submitLink = async () => {
     const data = {
       name: name,

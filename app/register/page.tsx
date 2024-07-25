@@ -1,14 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-//import image from "../../public/assets/Vector.png";
 import image from "../../public/assets/icons/Vector.png";
 import envelope from "../../public/assets/envelope.png";
 import lock from "../../public/assets/icons/lock.svg";
 import Image from "next/image";
 import SignUp from "../firebase/signup";
 import { useRouter } from "next/navigation";
-import firebaseApp from "../config/firebaseConfig";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
 const Register = () => {
@@ -34,8 +32,8 @@ const Register = () => {
       setPasswordError("Please enter the password");
       return;
     }
-    if (password.length < 6) {
-      setPasswordError("Password must be at least 6 characters");
+    if (password.length < 8) {
+      setPasswordError("Password must be at least 8 characters");
       return;
     }
     if (!/\d/.test(password) || !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
@@ -54,7 +52,7 @@ const Register = () => {
     // else successful
     console.log(result);
     alert("Account created successfully");
-    ///return router.push("/");
+    return router.push("/login");
   };
 
   const togglePasswordVisibility = () => {
