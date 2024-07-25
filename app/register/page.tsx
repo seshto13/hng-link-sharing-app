@@ -1,13 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+//import image from "../../public/assets/Vector.png";
 import image from "../../public/assets/icons/Vector.png";
 import envelope from "../../public/assets/envelope.png";
 import lock from "../../public/assets/icons/lock.svg";
 import Image from "next/image";
 import SignUp from "../firebase/signup";
 import { useRouter } from "next/navigation";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { ColorRing } from "react-loader-spinner";
+
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +18,7 @@ const Register = () => {
   const [usernameError, setUsernameError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
@@ -32,8 +35,8 @@ const Register = () => {
       setPasswordError("Please enter the password");
       return;
     }
-    if (password.length < 8) {
-      setPasswordError("Password must be at least 8 characters");
+    if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters");
       return;
     }
     if (!/\d/.test(password) || !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
@@ -43,15 +46,18 @@ const Register = () => {
       return;
     }
 
+    setLoading(true)
     const { result, error } = await SignUp(email, password);
 
     if (error) {
+      setLoading(false)
       return console.log(error);
     }
 
     // else successful
     console.log(result);
     alert("Account created successfully");
+    setLoading(false)
     return router.push("/login");
   };
 
@@ -89,6 +95,19 @@ const Register = () => {
             </p>
           </div>
           <br />
+
+          {loading && (
+        <ColorRing
+        visible={loading}
+        height="80"
+        width="80"
+       // className="text-center"
+        ariaLabel="blocks-loading"
+        wrapperStyle={{}}
+        wrapperClass="blocks-wrapper"
+        colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+      />
+      )}
 
           <div className="w-full bg-white text-zinc-800">
             <p className="text-xs font-normal leading-5">Email address</p>
@@ -188,12 +207,12 @@ const Register = () => {
 
           <br />
           <div className="flex items-center justify-center gap-2">
-            <p className="text-black">{`Already have an account?`} </p>
+            <p className="text-black">Already have an account? </p>
             <Link
-              href="/login"
+              href="/register"
               className="text-violet-600 hover:text-violet-900"
             >
-              Login
+              Create new account
             </Link>
           </div>
         </div>

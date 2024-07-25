@@ -131,4 +131,10 @@ const menu = [
     icon: "",
     color: "bg-sky-400 text-white",
   },
+
+  {
+    name: "Youtube",
+    icon: "",
+    color: "bg-sky-400 text-white",
+  },
 ];

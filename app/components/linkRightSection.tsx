@@ -7,7 +7,7 @@ import Platform from "./platform";
 const LinkRightSection = () => {
  
   return (
-    <div className="flex flex-col justify-center mt-16 md:mt-2 md:absolute left-[512px] top-[100px] md:w-[738px]  bg-white p-4">
+    <div className="flex flex-col justify-center mt-16 md:mt-2 md:absolute left-[500px] top-[100px] md:w-[700px]  bg-white p-4">
       <header className="text-[32px] font-bold leading-[150%] text-zinc-800 flex-grow ">
         Customize your links
       </header>

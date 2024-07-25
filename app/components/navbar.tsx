@@ -24,7 +24,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="flex items-center justify-between w-[100%] h-auto  text-black py-5 px-6 gap-10 md:px-10 fixed top-0 z-20 space-y-2 bg-white">
+    <div className="flex items-center justify-between w-[95%] md:w-[100%] h-auto  text-black py-5 px-6 gap-2 md:gap-10 md:px-10 fixed top-0 z-20 space-y-2 bg-white">
       <div className="flex items-center justify-center gap-2">
         <Image
           src={image}
@@ -68,15 +68,15 @@ const Navbar = () => {
           </Link>
         </ul>
 
-        <Link href="/">
-          <button className="w-32 h-12 px-4 py-1 md:py-2 me-2  bg-white border-2 border-violet-600 rounded-md hover:bg-violet-600 text-violet-600  hover:text-white hover:border-0">
+        <Link href="/login">
+          <button className="w-24 h-8 md:w-32 md:h-12 px-4 py-1 md:py-2 me-2  bg-white border-2 border-violet-600 rounded-md hover:bg-violet-600 text-violet-600  hover:text-white hover:border-0">
             Preview
           </button>
         </Link>
       </div>
 
       {nav && (
-        <div className="md:hidden justify-between items-center gap-8 absolute  top-[85px] lg:top-14 left-0 bg-gray-900  w-[70%] h-96 p-6 space-y-6 text-lg text-white">
+        <div className="md:hidden justify-between items-center gap-8 absolute  top-[80px] lg:top-14 left-0 bg-gray-900  w-[70%] h-screen p-6 space-y-6 text-lg text-white">
           <ul>
             <div className="space-y-20 gap-6 ">
               <Link href="/">

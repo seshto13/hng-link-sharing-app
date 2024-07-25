@@ -9,12 +9,14 @@ import Image from "next/image";
 import signIn from "../firebase/signin";
 import { useRouter } from "next/navigation";
 import { useCookies } from "next-client-cookies";
+import { ColorRing } from "react-loader-spinner";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const [authError, setAuthError] = useState("");
 
@@ -24,6 +26,7 @@ const Login = () => {
   const handleSubmit = async (event: any) => {
     setUsernameError("");
     setPasswordError("");
+    
     event.preventDefault();
     if (email.trim() == null || email == "") {
       setUsernameError("Please enter the username");
@@ -42,9 +45,12 @@ const Login = () => {
 
       return;
     }
+
+    setLoading(true)
     const { result, error } = await signIn(email, password);
 
     if (error) {
+      setLoading(false);
       console.log((error as Error).message);
       setAuthError("Invalid credentials");
 
@@ -55,6 +61,7 @@ const Login = () => {
     console.log(result?.user);
     cookies.set("SESSION", "true");
     cookies.set("user", JSON.stringify(result?.user));
+    setLoading(false);
 
     router.push("/");
   };
@@ -78,7 +85,7 @@ const Login = () => {
           devlinks
         </p>
       </div>
-
+      
       <form
         className="md:w-[476px] h-[482px] p-6 rounded-lg bg-white my-16"
         onSubmit={handleSubmit}
@@ -93,6 +100,19 @@ const Login = () => {
             </p>
           </div>
           <br />
+
+          {loading && (
+        <ColorRing
+        visible={loading}
+        height="80"
+        width="80"
+       // className="text-center"
+        ariaLabel="blocks-loading"
+        wrapperStyle={{}}
+        wrapperClass="blocks-wrapper"
+        colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+      />
+      )}
 
           <span className="text-red-500 text-sm italic">{authError}</span>
           <div className="w-full bg-white text-zinc-800">

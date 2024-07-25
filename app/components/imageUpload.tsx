@@ -23,9 +23,9 @@ const ImageUpload = () => {
   };
 
   return (
-    <div className="flex items-center justify-between border-1 h-60 p-4 bg-gray-50">
+    <div className="md:flex items-center justify-between border-1 h-60 p-4 bg-gray-50">
       <p className="w-1/3">Profile Image</p>
-      <div className="flex flex-col justify-center items-center w-1/3">
+      <div className="flex flex-col justify-center items-center md:w-1/3">
         <input
           type="file"
           accept="image/*"
