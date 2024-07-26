@@ -26,6 +26,7 @@ const Login = () => {
   const handleSubmit = async (event: any) => {
     setEmailError("");
     setPasswordError("");
+    setAuthError("");
 
     event.preventDefault();
     if (email.trim() == null || email == "") {
