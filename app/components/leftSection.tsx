@@ -42,16 +42,17 @@ const LeftSection = () => {
   }, [cookies, dispatch]);
 
   return (
-    <div className="hidden md:flex flex-col items-center justify-center w-full md:w-[512px] md:h-auto bg-gray-50  lg:absolute left-0 top-[90px] p-4 ">
-      <div className="relative flex items-center justify-center  mx-auto border-neutral-500 dark:border-gray-100 bg-white border-[1px] rounded-3xl h-[631px] w-[307px]">
-        <div className=" flex flex-col items-center">
+    <div className="hidden md:flex flex-col items-center justify-center w-full md:w-[512px] md:h-auto bg-gray-50  lg:absolute left-0 top-[90px] p-4 overflow-y-auto">
+      <div className="relative flex items-center justify-center  mx-auto border-neutral-500 dark:border-gray-100 bg-white border-[1px] rounded-3xl h-[631px] w-[307px]  g-red-200">
+        <div className=" flex flex-col items-center ">
           <Image
             src={phoneinner}
             width={600}
             height={600}
             alt=""
-            className="w-[265px] h-[611px] border-md"
+            className="w-[265px] h-[611px] border-md " 
           />
+          
 
           <div className="">
             <Image
@@ -83,7 +84,7 @@ const LeftSection = () => {
             />
           </div>
 
-          <div className="grid grid-cols-1 absolute top-64 left-9 gap-4">
+          <div className="grid grid-cols-1 h-80 absolute top-64 left-9 gap-4 overflow-y-auto rounded-b-2xl">
             {links &&
               links.map((item: any) => {
                 return (

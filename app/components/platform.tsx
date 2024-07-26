@@ -87,7 +87,7 @@ const Platform = () => {
             />
           </div>
           <select
-            className="w-full md:w-[674px] px-8 p-3 mt-10 rounded-xl  border-2 border-gray-300 hover:border-violet-300 cursor-pointer hover:shadow-md hover:shadow-violet-600 hover:shadow-opacity-25"
+            className="w-full md:w-[634px] px-8 p-3 mt-10 rounded-xl  border-2 border-gray-300 hover:border-violet-300 cursor-pointer hover:shadow-md hover:shadow-violet-600 hover:shadow-opacity-25"
             id="username"
             value={name}
             onChange={(e) => {
@@ -117,7 +117,7 @@ const Platform = () => {
           </div>
           <input
             type="text"
-            className="w-full md:w-[674px] px-8 p-3 mt-10 rounded-xl  border-2 border-gray-300 hover:border-violet-300  hover:shadow-md hover:shadow-violet-600 hover:shadow-opacity-25"
+            className="w-full md:w-[634px] px-8 p-3 mt-10 rounded-xl  border-2 border-gray-300 hover:border-violet-300  hover:shadow-md hover:shadow-violet-600 hover:shadow-opacity-25"
             id="text"
             value={link}
             onChange={(event) => setLink(event.target.value)}
@@ -126,8 +126,10 @@ const Platform = () => {
         </div>
       </div>
 
+
+
       <button
-        className="px-4 py-2 border-2  bg-violet-600 text-white rounded-md"
+        className="px-4 my-4 py-2 border-2  bg-violet-600 text-white rounded-md"
         onClick={() => submitLink()}
       >
         Save
