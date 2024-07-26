@@ -18,7 +18,7 @@ const Navbar = () => {
   const currentPath = usePathname();
 
   async function handleLogout() {
-    cookies.remove("SESSION");
+    cookies.remove(process.env.SESSION_NAME ?? "link-app-session");
     cookies.remove("user");
     router.push("/login");
   }

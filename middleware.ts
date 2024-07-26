@@ -7,7 +7,9 @@ export function middleware(request: NextRequest) {
   const PROTECTED_PATHS = ["/", "/dashboard", "/profile"];
   const PUBLIC_PATHS = ["/login", "/register"];
 
-  const loggedin: string = request.cookies.get("SESSION")?.value ?? "false";
+  const loggedin: string =
+    request.cookies.get(process.env.SESSION_NAME ?? "link-app-session")
+      ?.value ?? "false";
 
   if (
     loggedin !== "true" &&

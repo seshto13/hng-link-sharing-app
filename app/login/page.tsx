@@ -14,7 +14,7 @@ import { ColorRing } from "react-loader-spinner";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [usernameError, setUsernameError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [passwordError, setPasswordError] = useState("");
@@ -24,12 +24,12 @@ const Login = () => {
   const cookies = useCookies();
 
   const handleSubmit = async (event: any) => {
-    setUsernameError("");
+    setEmailError("");
     setPasswordError("");
-    
+
     event.preventDefault();
     if (email.trim() == null || email == "") {
-      setUsernameError("Please enter the username");
+      setEmailError("Please enter the username");
       return;
     }
 
@@ -46,7 +46,7 @@ const Login = () => {
       return;
     }
 
-    setLoading(true)
+    setLoading(true);
     const { result, error } = await signIn(email, password);
 
     if (error) {
@@ -58,11 +58,16 @@ const Login = () => {
     }
 
     // else successful
+    const expires = new Date(
+      new Date().getTime() + parseInt(process.env.SESSION_EXPIRES ?? "7200000")
+    );
     console.log(result?.user);
-    cookies.set("SESSION", "true");
-    cookies.set("user", JSON.stringify(result?.user));
-    setLoading(false);
+    cookies.set(process.env.SESSION_NAME ?? "link-app-session", "true", {
+      expires: expires,
+    });
+    cookies.set("user", JSON.stringify(result?.user), { expires: expires });
 
+    setLoading(false);
     router.push("/");
   };
 
@@ -85,7 +90,7 @@ const Login = () => {
           devlinks
         </p>
       </div>
-      
+
       <form
         className="md:w-[476px] h-[482px] p-6 rounded-lg bg-white my-16"
         onSubmit={handleSubmit}
@@ -102,17 +107,17 @@ const Login = () => {
           <br />
 
           {loading && (
-        <ColorRing
-        visible={loading}
-        height="80"
-        width="80"
-       // className="text-center"
-        ariaLabel="blocks-loading"
-        wrapperStyle={{}}
-        wrapperClass="blocks-wrapper"
-        colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-      />
-      )}
+            <ColorRing
+              visible={loading}
+              height="80"
+              width="80"
+              // className="text-center"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+              colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+            />
+          )}
 
           <span className="text-red-500 text-sm italic">{authError}</span>
           <div className="w-full bg-white text-zinc-800">
@@ -131,18 +136,27 @@ const Login = () => {
                   className=" w-4 h-4 border-md"
                 />
               </div>
+
               <input
+                className=" w-full  px-8 p-3 rounded-xl  border-2 border-gray-300 hover:border-violet-300 cursor-pointer hover:shadow-md hover:shadow-violet-600 hover:shadow-opacity-25"
+                id="email"
                 type="text"
-                className="w-full  px-8 p-3 rounded-xl  border-2 border-gray-300 hover:border-violet-300 cursor-pointer hover:shadow-md hover:shadow-violet-600 hover:shadow-opacity-25"
-                id="username"
                 placeholder="e.g alex@email.com"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
               />
+
+              <div
+                className="absolute left-56 inset-y-0  pl-3  
+                    flex items-center gap-4 
+                    pointer-events-none"
+              >
+                {emailError && (
+                  <p className=" text-red-500 text-sm italic">{emailError}</p>
+                )}
+              </div>
             </div>
           </div>
-          <p className="text-red-500 text-sm italic">{usernameError}</p>
-
           <br />
 
           <p className="text-xs font-normal leading-5">Password</p>
@@ -162,7 +176,7 @@ const Login = () => {
               />
             </div>
             <input
-              className="w-full  px-8 p-3 rounded-xl  border-2 border-gray-300 hover:border-violet-300 cursor-pointer hover:shadow-md hover:shadow-violet-600 hover:shadow-opacity-25"
+              className=" w-full  px-8 p-3 rounded-xl  border-2 border-gray-300 hover:border-violet-300 cursor-pointer hover:shadow-md hover:shadow-violet-600 hover:shadow-opacity-25"
               id="password"
               type={showPassword ? "text" : "password"}
               placeholder="e.g enter your password"
@@ -171,7 +185,7 @@ const Login = () => {
             />
 
             <div
-              className="inset-y-0 left-0 pl-3  
+              className="absolute left-56 inset-y-0  pl-3  
                     flex items-center gap-4 
                     pointer-events-none"
             >
